@@ -6,6 +6,8 @@ const MongoClient = require("mongodb").MongoClient;
 
 let PORT = 3000; 
 
+app.set("view engine", "ejs");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(PORT, function(){
@@ -30,6 +32,7 @@ MongoClient.connect('mongodb+srv://BigUrn:BigUrn2021@cluster0.eb4nl.mongodb.net/
             db.collection("urns").find().toArray()
             .then(results => {
                 console.log(results)
+                res.render("index.ejs", {urns: results})
             })
             .catch(error => console.error(error))
         })
