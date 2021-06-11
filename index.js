@@ -1,14 +1,24 @@
+
 var express = require('Express');
 var app = express();
-const dotenv = require("dotenv");
+const dotenv = require("dotenv").config({path:__dirname+'/.env}'});
 const mongoose = require('mongoose');
+dotenv.config();
 
+const path = require("path");
+require("dotenv").config({ path: path.resolve })
 
+//connection to DB
+mongoose.set("useFindAndModify", false);
+console.log(process.env.DB_CONNECT);
 
+mongoose.connect(process.env.DB_CONNECT, {
+    useNewUrlParser: true }, () => {
+        console.log("Connected to DB!");
+    });
 
 let PORT = 3000; 
 
-require("dotenv");
 
 // middleware
 app.use(express.static("public"));
