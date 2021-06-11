@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory</title>
-    <!-- Linking External CSS -->
-    <link rel="stylesheet" type="text/css" href="./styles.css"> 
+    <title>Todo App</title>
+    <!-- Link to our external stylesheet -->
+    <link rel="stylesheet" href="/styles/style.css" type="text/css">
+    <!-- Link to FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
+
 <body>
-    <h2 id="inventory-header">Inventory</h2>
-    <form action="/urns" method="POST">
-    <input type="text" placeholder="Title" name="name">
-    <input type="text" placeholder="Photo" name="photo">
-    <input type="text" placeholder="Description" name="description">
-    <button type="submit">Submit</button>
-    </form>
-
-    <h2>Urns</h2>
-
-    <% for(let i = 0; i < urns.length; i++){%>
-        <li class="urn">
-            <span><%= urns[i].name %></span>
-            <span><%= urns[i].photo %></span>
-            <span><%= urns[i].description %></span>
-            <button id="update-btn">Update</button>
-            <button id="delete-btn">Delete</button>
-        </li>
-    
-    <% } %>
-    <script src="/main.js"></script>
+    <div class="urn-container">
+        <h2>Urns in Stock</h2>
+            <div class="urn">
+                <!-- Form to add urns -->
+                <form action="/" method="POST" class="todo-header">
+                    <input type="text" name="urn-name" placeholder="Name">
+                    <input type="text" name="quantity" placeholder="Quantity">
+                    <input type="text" name="keyword" placeholder="Keywords">
+                    <button type="submit"><span class= "fas fa-plus"></span></button>
+                </form>
+            <!-- End of Form to add urns -->
+            <ul class="urn-list">
+                <li class= "urn-stock-item">
+                    <div class="urn-stock-item-name">Urn Name</div>
+                    <!-- Button to update -->
+                    <a href="" class="edit">
+                        <span class="fas fa-edit"></span>
+                    </a>
+                    <!-- Button to delete -->
+                    <a href="" class="remove">
+                        <span class="fas fa-times"></span>
+                    </a>
+                </li>
+            </ul>
+            </div>
+    </div>
 </body>
 </html>
