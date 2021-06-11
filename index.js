@@ -20,11 +20,9 @@ app.use(express.static("public"));
 app.listen(PORT, function(){
     console.log(`Server.js listening on ${PORT}`)
 })
-// app.get("/", function(req, res){
-//     res.send("hello");
-// })
-
-MongoClient.connect('mongodb+srv://BigUrn:BigUrn2021@cluster0.eb4nl.mongodb.net/Inventory?retryWrites=true&w=majority', {useUnifiedTopology: true})
+app.get("/", function(req, res){
+    res.send("hello");
+})
 
     .then(client => { 
         console.log("Connected to Mongodb")
