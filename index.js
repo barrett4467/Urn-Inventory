@@ -1,12 +1,19 @@
 
 var express = require('Express');
 var app = express();
-const dotenv = require("dotenv").config({path:__dirname+'/.env}'});
+const dotenv = require("dotenv");
 const mongoose = require('mongoose');
+let PORT = 3000; 
+
 dotenv.config();
 
-const path = require("path");
-require("dotenv").config({ path: path.resolve })
+const NewUrn = require("./models/NewUrn");
+dotenv.config();
+
+// middleware
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
 
 //connection to DB
 mongoose.set("useFindAndModify", false);
@@ -15,27 +22,21 @@ console.log(process.env.DB_CONNECT);
 mongoose.connect(process.env.DB_CONNECT, {
     useNewUrlParser: true }, () => {
         console.log("Connected to DB!");
+
+        //server set up
+        app.listen(PORT, () => {
+            console.log(`Server up and running on port ${PORT}`);
+        });
     });
 
-let PORT = 3000; 
 
 
-// middleware
-app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
-app.set("view engine", "ejs");
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-// connecting public folder for update
-app.use(express.static("public"));
-
-app.listen(PORT, function(){
-    console.log(`Server.js listening on ${PORT}`)
-})
 app.get("/", function(req, res){
-    res.render("inventory.ejs");
-})
+    NewUrn.find({}, (err, tasks) => {
+        res.render("inventory.ejs", { newUrn: urn });
+    });
+});
 
 // POST METHOD
 app.post("/", (req, res) => {
